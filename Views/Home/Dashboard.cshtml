@@ -1,0 +1,56 @@
+@using cSharpBelt.Models
+@model User
+
+<h1>Dojo Activity Center</h1>
+<a href="/">Logoff</a>
+<p>Welcome @ViewBag.user.First_Name !</p>
+<h1>@ViewBag.err</h1>
+
+
+
+<table>
+    <tr>
+        <th>Activity | </th>
+        <th>Date and Time | </th>
+        <th>Duration | </th>
+        <th>Event Cordinator | </th>
+        <th>Number of Participants </th>
+        <th> | Action </th>
+
+
+    </tr>
+
+    @foreach(var act in @ViewBag.allActs)
+    {
+        bool going = false;
+        @foreach(var intr in act.Intrsts){
+            @if(intr.User == ViewBag.user){
+                going = true;
+            }
+
+        }
+        <tr>
+            <td><a href="viewAct/@act.ActivitiesId"> @act.Title </a></td>
+            <td>| @act.Date.ToString("MM/dd") &#64 @act.Time.ToString("HH:mmtt") | </td>
+            <td> @act.Duration @act.durType</td>
+            <td>@act.Creator</td>
+            <td>@act.NumOfPrts</td>
+            @if(act.UserId == ViewBag.user.UserId){
+                <td><a href="/Home/Delete/@act.ActivitiesId">Delete </a></td>
+            }
+            else if(going){
+                <td><a href="/Home/leave/@act.ActivitiesId">Leave</a> </td>
+
+            }
+            else{
+                <td><a href="/Home/join/@act.ActivitiesId">Join</a> </td>
+            }
+        </tr>
+        
+    }
+
+</table>
+
+
+
+<a href="addNewAct"> <button>Add New Activity</button> </a>

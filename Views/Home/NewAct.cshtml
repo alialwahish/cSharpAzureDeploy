@@ -1,0 +1,27 @@
+@using cSharpBelt.Models
+@model Activities
+
+<h1>Dojo Activity Center</h1>
+<a href="/">Logoff</a>
+<a href="navToDashboard">Home</a>
+
+<h2>Create New Activity!</h2>
+
+<form asp-action="createNewAct">
+
+<label>Title: <input type="text" name="Title"></label><br><br>
+<label>Time: <input type="time" name="Time" min="0"></label> <br><br>
+<label>Date: <input type="date" name="Date"></label> <br><br>
+<label>Duration: <input type="number" name="Duration"></label>  
+<select name="durType">
+  <option value="Minutes">Minutes</option>
+  <option value="Hours">Hours</option>
+  <option value="Days">Days</option>
+  
+</select><br><br> 
+<label>Description: <input type="text" name="Description" style="width:500px ; height:30px"></label>
+<br><br> 
+<input type="submit" value="Create Activity">
+
+
+</form>
